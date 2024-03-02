@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import confetti from 'canvas-confetti';
 
 const movies = [
   { name: "Forrest Gump", emoji: "🏃🍫🍤" },
@@ -24,15 +25,17 @@ const movies = [
   { name: "The Shawshank Redemption", emoji: "🔒🔑💰" },
   ];
 
-  
 function App() {
 
   function validar() {
     if(movie.name.toUpperCase() == inputValue.toUpperCase()) {
-      setCount(count + 1);
+      const newpoint = count + 1;
+      confetti();
+      setCount(newpoint);
       setInputValue("");
     }else{
-      setLive(live - 1)
+      const newlive = live - 1;
+      setLive(newlive);
     }
   }
   
@@ -50,11 +53,11 @@ function App() {
       <h3 className='live'>live: {live}</h3>
       <h3 className='point'>Point: {count}</h3>
       <h1>Guess Movie</h1>
-      <h2>{movie.emoji}</h2>
-      <div className='form-response'>
+      {live ? <><h2>{movie.emoji}</h2>
+       <div className='form-response'>
         <input type="text" id="response" placeholder="Insert movie´s name" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
         <button onClick={validar}>Send</button>
-      </div>
+      </div></> : <div className='lose'>you lose!!<br /><button onClick={() => [setLive(3), setCount(0)]}>Retry</button></div>}
     </div>
   )
 }

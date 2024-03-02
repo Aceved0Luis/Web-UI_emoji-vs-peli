@@ -67,3 +67,16 @@ h1{
   background-color: rgb(131, 209, 14);
   color:white;
 }
+
+.lose{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color:red;
+}
+
+.lose button{
+  margin-top: 5px;
+  border-radius: 10px;
+  padding: 4px;
+}

@@ -47,18 +47,23 @@ function App() {
 
   useEffect(() => {
     setMovie(movies[Math.floor(Math.random() * movies.length)]);
-  },[count, live])
+  },[count, live==0])
 
   return (
     <div className='container'>
       <h3 className='live'>live: {live}</h3>
       <h3 className='point'>Point: {count}</h3>
       <h1>Guess Movie</h1>
-      {live ? <><h2>{movie.emoji}</h2>
-       <div className='form-response'>
-        <input type="text" id="response" placeholder="Insert movie´s name" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
-        <button onClick={validar}>Send</button>
-      </div></> : <div className='lose'>you lose!!<br /><button onClick={() => [setLive(3), setCount(0)]}>Retry</button></div>}
+      {live ? <>
+        <h2>{movie.emoji}</h2>
+        <div className='form-response'>
+          <input type="text" id="response" placeholder="Insert movie´s name" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
+          <button onClick={validar}>Send</button>
+        </div></> : 
+        <div className='lose'>you lose!!<br />
+        <button onClick={() => [setLive(3), setCount(0)]}>Retry</button>
+        </div>
+      }
     </div>
   )
 }

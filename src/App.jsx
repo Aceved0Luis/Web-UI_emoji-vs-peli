@@ -35,6 +35,7 @@ function App() {
       setInputValue("");
     }else{
       const newlive = live - 1;
+      setInputValue("");
       setLive(newlive);
     }
   }
@@ -46,7 +47,7 @@ function App() {
 
   useEffect(() => {
     setMovie(movies[Math.floor(Math.random() * movies.length)]);
-  },[count])
+  },[count, live])
 
   return (
     <div className='container'>

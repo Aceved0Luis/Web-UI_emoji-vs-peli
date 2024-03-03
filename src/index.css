@@ -79,4 +79,5 @@ h1{
   margin-top: 5px;
   border-radius: 10px;
   padding: 4px;
+  cursor: pointer;
 }

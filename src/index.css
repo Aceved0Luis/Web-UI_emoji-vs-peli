@@ -85,5 +85,6 @@ h1{
   padding: 10px;
   border-radius: 10px;
   background-color: rgb(131, 209, 14);
-  color:white
+  color:white;
+  cursor: pointer;
 }

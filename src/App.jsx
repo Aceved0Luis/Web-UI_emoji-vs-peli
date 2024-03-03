@@ -28,16 +28,19 @@ const movies = [
 function App() {
 
   function validar() {
-    if(movie.name.toUpperCase() == inputValue.toUpperCase()) {
-      const newpoint = count + 1;
-      confetti();
-      setCount(newpoint);
-      setInputValue("");
-    }else{
-      const newlive = live - 1;
-      setInputValue("");
-      setLive(newlive);
+    if (inputValue.length > 0){
+      if(movie.name.toUpperCase() == inputValue.toUpperCase()) {
+        const newpoint = count + 1;
+        confetti();
+        setCount(newpoint);
+        setInputValue("");
+      }else{
+        const newlive = live - 1;
+        setInputValue("");
+        setLive(newlive);
+      }
     }
+    
   }
   
   const [count, setCount] = useState(0)
@@ -56,10 +59,10 @@ function App() {
       <h1>Guess Movie</h1>
       {live ? <>
         <h2>{movie.emoji}</h2>
-        <div className='form-response'>
-          <input type="text" id="response" placeholder="Insert movie´s name" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
-          <button onClick={validar}>Send</button>
-        </div></> : 
+        <form className='form-response'>
+          <input required type="text" id="response" placeholder="Insert movie´s name" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
+          <button type='submit' onClick={validar}>Send</button>
+        </form></> : 
         <div className='lose'>you lose!!<br />
         <button onClick={() => [setLive(3), setCount(0)]}>Retry</button>
         </div>

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import confetti from 'canvas-confetti';
 import { movies } from './components/movies';
-import { Titulo } from './components/titleMovie';
+import { Movie } from './components/titleMovie';
 import { Marcador } from './components/marcadores';
+import { Titulo } from './components/titulo';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
     
   }
   
+  const [play,setPlay] = useState(false);
   const [count, setCount] = useState(0)
   const [live, setLive] = useState(3)
   const [movie, setMovie] = useState("")
@@ -33,19 +35,26 @@ function App() {
 
   return (
     <div className='container'>
-      <Marcador texto={"lives: "} marca={live} clase={"live"}/>
-      <Marcador texto={"Point: "} marca={count} clase={"point"}/>
-      <h1>Guess Movie</h1>
-      {live ? <>
-        <Titulo text={movie.emoji} />
-        <form className='form-response'>
-          <input required type="text" id="response" placeholder="Insert movie´s name" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
-          <button type='submit' onClick={validar}>Send</button>
-        </form></> : 
-        <div className='lose'>you lose!!<br />
-        <button onClick={() => [setLive(3), setCount(0)]}>Retry</button>
-        </div>
-      }
+      <>
+        {!play ? <><Titulo text={"Guess Movie"} />
+          <button className="play" onClick={()=> setPlay(!play)}>Play</button> </> : 
+          <>
+            <Marcador texto={"lives: "} marca={live} clase={"live"}/>
+            <Marcador texto={"Point: "} marca={count} clase={"point"}/>
+            <Titulo text={"Guess Movie"} />
+            {live ? <>
+              <Movie text={movie.emoji} />
+              <form className='form-response'>
+                <input required type="text" id="response" placeholder="Insert movie´s name" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
+                <button type='submit' onClick={validar}>Send</button>
+              </form></> : 
+              <div className='lose'>you lose!!<br />
+              <button onClick={() => [setLive(3), setCount(0)]}>Retry</button>
+              </div>
+            }
+          </>
+        }
+      </>
     </div>
   )
 }
